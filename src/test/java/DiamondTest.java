@@ -30,9 +30,6 @@ public class DiamondTest {
         String result = new Diamond().buildFor("D");
 
         assertThat(result).isEqualTo("   A\n  B B\n C   C\nD     D\n C   C\n  B B\n   A\n");
-        System.out.println(new Diamond().buildFor("E"));
-        System.out.println(new Diamond().buildFor("F"));
-        System.out.println(new Diamond().buildFor("Z"));
     }
 
 }

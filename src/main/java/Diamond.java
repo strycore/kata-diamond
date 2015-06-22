@@ -1,22 +1,25 @@
 public class Diamond {
     public String buildFor(String character) {
-        char a = 'A';
-        int initialDistance = character.charAt(0) - a;
-        return doTheJob(initialDistance);
+        int initialDistance = initialDistanceToA(character);
+        return iterate(initialDistance, initialDistance);
     }
 
-    private String doTheJob(int initialDistance) {
-        return doTheJob(initialDistance, initialDistance);
+    private int initialDistanceToA(String character) {
+        return character.charAt(0) - 'A';
     }
 
-    private String doTheJob(int distance, int distanceInitiale) {
+    private String iterate(int distanceToA, int initialDistanceToA) {
         String result = "";
-        if (distance > 0) {
-            result += addLine(distance, Character.toString((char) ('A' + (distanceInitiale - distance))));
-            result += doTheJob(distance - 1, distanceInitiale);
+        String charAfterA = charAfterA(initialDistanceToA - distanceToA);
+        if (distanceToA > 0) {
+            result += addLine(distanceToA, charAfterA);
+            result += iterate(distanceToA - 1, initialDistanceToA);
         }
-        result += addLine(distance, Character.toString((char) ('A' + (distanceInitiale - distance))));
-        return result;
+        return result + addLine(distanceToA, charAfterA);
+    }
+
+    private String charAfterA(int distance) {
+        return Character.toString((char) ('A' + distance));
     }
 
     private String addLine(int newDistance, String currentCharacter) {
@@ -31,7 +34,6 @@ public class Diamond {
             }
             result += currentCharacter;
         }
-        result += "\n";
-        return result;
+        return result + "\n";
     }
 }
