@@ -2,7 +2,7 @@ def get_offset_of_char(char):
     return ord(char) - ord('A')
 
 
-def draw_line(distance, char):
+def draw_line(char, distance):
     result = " " * distance + char
     if get_offset_of_char(char):
         result += " " * ((get_offset_of_char(char) - 1) * 2 + 1) + char
@@ -18,9 +18,9 @@ def diamond(base_char, distance=None):
     result = ""
     char = chr(ord('A') + initial_distance - distance)
     if distance:
-        result += draw_line(distance, char)
+        result += draw_line(char, distance)
         result += diamond(base_char, distance - 1)
-    return result + draw_line(distance, char)
+    return result + draw_line(char, distance)
 
 
 assert(diamond('A') == "A\n")
